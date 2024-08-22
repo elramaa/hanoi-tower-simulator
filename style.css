@@ -38,3 +38,20 @@
   border-radius: 9999px;
   z-index: 10;
 }
+
+@media only screen and (max-height: 768px) {
+  .rod {
+    width: 10rem;
+    height: 10rem;
+  }
+  .rod::before {
+    width: 0.75rem;
+  }
+  .rod::after {
+    height: 0.75rem;
+  }
+  .disk {
+    width: calc(10rem * var(--i));
+    height: 1rem;
+  }
+}
