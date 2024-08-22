@@ -21,8 +21,8 @@ $(function () {
   $("disk-input").val(DEFAULT_DISK);
   generateDisks(diskAmount);
   $(document).on("mousemove", moveDisk).on("mouseup", dropDisk);
-  document.querySelector(body).addEventListener("touchmove", movedisk);
-  document.querySelector(body).addEventListener("touchend", dropDisk);
+  window.addEventListener("touchmove", moveDisk);
+  window.addEventListener("touchend", dropDisk);
 
   // ! MOVEMENT FUNCTION
   function selectDisk() {
