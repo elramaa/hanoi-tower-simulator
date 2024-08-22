@@ -4,6 +4,8 @@ const MAX_DISK = 8;
 const DEFAULT_DISK = 3;
 
 $(function () {
+  if (navigator.userAgentData.mobile)
+    alert("Please rotate your phone and enjoy!");
   // ! GAME INITIALIZATION
   let selectedDisk = null;
   let diskAmount = DEFAULT_DISK;
@@ -18,49 +20,54 @@ $(function () {
   console.log(rodOffset);
   $("disk-input").val(DEFAULT_DISK);
   generateDisks(diskAmount);
-  $(document)
-    .on("mousemove", function (e) {
-      if (selectedDisk) {
-        getDisk(selectedDisk).offset({ top: e.clientY, left: e.clientX });
-        // $(selectedDisk).offset({ top: e.clientY, left: e.clientX });
-      }
-    })
-    .on("mouseup", function () {
-      if (selectedDisk) {
-        let moved = false;
-        const { top, left } = getDisk(selectedDisk).offset();
-        console.log(top, left);
-        for (rod of Object.entries(rodOffset)) {
-          if (
-            top >= rod[1].top &&
-            top <= rod[1].bottom &&
-            left >= rod[1].left &&
-            left <= rod[1].right
-          ) {
-            moved = true;
-            getDisk(selectedDisk).remove();
-            const disk = $("<div></div>")
-              .addClass(`disk bg-red-${selectedDisk * 100}`)
-              .data("i", selectedDisk)
-              .attr("draggable", true)
-              .css("--i", selectedDisk)
-              .on("mousedown", selectDisk);
-            $(".rod").eq(rod[0]).prepend(disk);
-            updateMoveLogs();
-            break;
-          }
-        }
-        if (moved == false)
-          getDisk(selectedDisk).css({ position: "", left: "", top: "" });
-        selectedDisk = null;
-      }
-    });
+  $(document).on("mousemove", moveDisk).on("mouseup", dropDisk);
+  document.querySelector(body).addEventListener("touchmove", movedisk);
+  document.querySelector(body).addEventListener("touchend", dropDisk);
 
-  // ! MOVEMENT CONFIGURATION
+  // ! MOVEMENT FUNCTION
   function selectDisk() {
     selectedDisk = $(this).data("i");
   }
+  function moveDisk(e) {
+    if (selectedDisk) {
+      getDisk(selectedDisk).offset({ top: e.clientY, left: e.clientX });
+    }
+  }
+  function dropDisk() {
+    if (selectedDisk) {
+      let moved = false;
+      const { top, left } = getDisk(selectedDisk).offset();
+      console.log(top, left);
+      for (rod of Object.entries(rodOffset)) {
+        if (
+          top >= rod[1].top &&
+          top <= rod[1].bottom &&
+          left >= rod[1].left &&
+          left <= rod[1].right
+        ) {
+          moved = true;
+          getDisk(selectedDisk).remove();
+          const disk = $("<div></div>")
+            .addClass(`disk bg-red-${selectedDisk * 100}`)
+            .data("i", selectedDisk)
+            .attr("draggable", true)
+            .css("--i", selectedDisk)
+            .on("mousedown", selectDisk);
+          disk[0].addEventListener("touchstart", selectDisk);
+          $(".rod").eq(rod[0]).prepend(disk);
+          updateMoveLogs();
+          break;
+        }
+      }
+      if (moved == false)
+        getDisk(selectedDisk).css({ position: "", left: "", top: "" });
+      selectedDisk = null;
+    }
+  }
   $(".disk").on("mousedown", selectDisk);
+  document
+    .querySelectorAll(".disk")
+    .forEach((e) => e.addEventListener("touchstart", selectDisk));
 
   // ! DISK INPUT BUTTON
   $("button#disk-plus").on("click", () => {
@@ -96,6 +103,7 @@ $(function () {
   $("button#reset-btn").on("click", resetGame);
 
   // ! FUNCTIONS
+
   function getDisk(i) {
     return $(".disk").filter(function () {
       return $(this).data("i") == i;
@@ -121,11 +129,8 @@ $(function () {
   function generateDisks(n) {
     const firstRod = $(".rod").first();
     for (let i = 1; i <= n; ++i) {
-      const disk = $("<div></div>")
-        .addClass(`disk bg-red-${i * 100}`)
-        .data("i", i)
-        .attr("draggable", true)
-        .css("--i", i);
+      const disk = createDisk(i);
+      disk[0].addEventListener("touchstart", selectDisk);
       firstRod.append(disk);
     }
   }
@@ -135,7 +140,8 @@ $(function () {
       .addClass(`disk bg-red-${i * 100}`)
       .data("i", i)
       .attr("draggable", true)
-      .css("--i", i);
+      .css("--i", i)
+      .on("mousedown", selectDisk);
   }
 
   function resetGame() {
@@ -146,5 +152,8 @@ $(function () {
     });
     generateDisks(diskAmount);
     $(".disk").on("mousedown", selectDisk);
+    document
+      .querySelectorAll(".disk")
+      .forEach((e) => e.addEventListener("touchstart", selectDisk));
   }
 });
