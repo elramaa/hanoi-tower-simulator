@@ -39,7 +39,7 @@
   z-index: 10;
 }
 
-@media only screen and (max-height: 768px) {
+@media only screen and (max-height: 400px) {
   .rod {
     width: 10rem;
     height: 10rem;
