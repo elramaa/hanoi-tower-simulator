@@ -40,6 +40,10 @@
 }
 
 @media only screen and (max-height: 400px) {
+  #title {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+  }
   .rod {
     width: 10rem;
     height: 10rem;
