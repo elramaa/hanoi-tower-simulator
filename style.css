@@ -1,0 +1,40 @@
+.rod {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  height: 20rem;
+  justify-content: end;
+  align-items: center;
+}
+
+.rod::before {
+  content: "";
+  width: 1.5rem;
+  height: 100%;
+  background: #6b7280;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-radius: 9999px 9999px 0 0;
+}
+
+.rod::after {
+  content: "";
+  width: 100%;
+  height: 1.5rem;
+  background: #6b7280;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+}
+
+.disk {
+  width: calc(20rem * var(--i) / 8);
+  height: 2rem;
+  border-radius: 9999px;
+  z-index: 10;
+}

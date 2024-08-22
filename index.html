@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['"Outfit"'],
+          },
+          extend: {
+            colors: {
+              debug: "#ff0000",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- <style type="text/tailwindcss">
+      @layer components {
+        .rod {
+          @apply rod relative size-[14rem] before:absolute before:content-[''] before:w-4/5 before:h-6 before:rounded-full before:bg-gray-500 before:bottom-0 before:left-1/2 before:-translate-x-1/2 after:absolute after:content-[''] after:w-6 after:h-full after:rounded-full after:bg-gray-500 after:bottom-0 after:left-1/2 after:-translate-x-1/2;
+        }
+      }
+    </style> -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="icon" href="icons/icon.svg" type="image/x-icon" />
+    <title>Hanoi Tower</title>
+  </head>
+  <body
+    class="bg-[#252525] w-screen h-screen flex flex-col font-sans text-white p-8"
+  >
+    <div class="h-[7.5%] flex items-center gap-4">
+      <img src="icons/icon.svg" alt="Icon" class="h-full aspect-square" />
+      <h1 class="font-bold text-white text-3xl">Tower of Hanoi Simulator</h1>
+    </div>
+    <div class="h-full flex justify-center items-center gap-8 mb-8">
+      <div class="rod"></div>
+      <div class="rod"></div>
+      <div class="rod"></div>
+    </div>
+    <!-- OPTION -->
+    <div class="h-[7.5%] mb-16 flex justify-center gap-4">
+      <div
+        class="text-xl h-full w-fit px-2 bg-gray-500 flex rounded-full overflow-hidden"
+      >
+        <input
+          id="disk-input"
+          min="1"
+          max="9"
+          value="3"
+          readonly
+          class="h-full aspect-square text-center font-bold text-white bg-gray-500 outline-none"
+        />
+        <div class="h-full aspect-square grid grid-rows-2 overflow-hidden">
+          <button id="disk-plus">
+            <i class="block text-sm bi bi-caret-up-fill"></i>
+          </button>
+          <button id="disk-minus">
+            <i class="block text-sm bi bi-caret-down-fill"></i>
+          </button>
+        </div>
+      </div>
+      <div
+        class="bg-gray-500 px-2 divide-x divide-gray-600 h-full flex w-fit rounded-full overflow-hidden"
+      >
+        <button id="undo-btn" class="h-full aspect-square">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="redo-btn" class="h-full aspect-square">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+      <button
+        id="reset-btn"
+        class="bg-gray-500 text-white text-lg font-medium flex justify-center items-center px-8 rounded-full"
+      >
+        Reset
+      </button>
+      <div class="flex items-center w-fit text-lg text-white">
+        <p>Moves: <span id="move-count">0</span></p>
+      </div>
+    </div>
+    <footer class="h-fit flex justify-center">
+      <p>Created by <a>@_.elrama</a></p>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
