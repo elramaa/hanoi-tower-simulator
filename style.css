@@ -41,11 +41,13 @@
 
 @media only screen and (max-height: 400px) {
   body {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   #title {
-    font-size: 1.25rem; /* 20px */
-    line-height: 1.75rem; /* 28px */
+    font-size: 1rem !important;
+  }
+  #section {
+    height: 15% !important;
   }
   .rod {
     width: 10rem;

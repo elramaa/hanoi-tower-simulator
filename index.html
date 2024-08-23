@@ -16,7 +16,7 @@
     ></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
+      const tailwind.config = {
         theme: {
           fontFamily: {
             sans: ['"Outfit"'],
@@ -59,7 +59,7 @@
       <div class="rod"></div>
     </div>
     <!-- OPTION -->
-    <div class="h-[7.5%] mb-8 flex justify-center gap-4">
+    <section id="option" class="h-[7.5%] mb-8 flex justify-center gap-4">
       <div
         class="text-xl h-full w-fit px-2 bg-gray-500 flex rounded-full overflow-hidden"
       >
@@ -71,7 +71,7 @@
           readonly
           class="h-full aspect-square text-center font-bold text-white bg-gray-500 outline-none"
         />
-        <div class="h-full aspect-square grid grid-rows-2 overflow-hidden">
+        <div class="h-full aspect-square w-fit grid grid-rows-2 overflow-hidden">
           <button id="disk-plus">
             <i class="block text-sm bi bi-caret-up-fill"></i>
           </button>
@@ -99,7 +99,7 @@
       <div class="flex items-center w-fit text-lg text-white">
         <p>Moves: <span id="move-count">0</span></p>
       </div>
-    </div>
+    </section>
     <footer class="h-fit flex justify-center">
       <p>Created by <a>@_.elrama</a></p>
     </footer>
